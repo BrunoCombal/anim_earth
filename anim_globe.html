@@ -45,7 +45,7 @@ http://bl.ocks.org/mbostock/4183330
      var title = d3.select("h1");
 
      queue().defer(d3.json, "./world-110m.json")
-       .defer(d3.json,"./eez.geojson")
+       .defer(d3.json,"./eeztopojson.json")
        .defer(d3.tsv, "./world-country-names.tsv")
        .await(ready);
      
