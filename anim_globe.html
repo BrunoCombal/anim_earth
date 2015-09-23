@@ -65,18 +65,18 @@ http://bl.ocks.org/mbostock/4183330
       However human activity is not even across the globe,<br/>
       incurring variable global and local risk on ocean services<br/>
       Discover detailed analysis for <a href="onesharedocean.org/open_ocean" target="_top" style="font-weight:bold">Open Ocean</a> and <a href="oneSharedocean.org/lmes" target="_top" style="font-weight:bold">Large Marine Ecosystems</a><br/>
-      <h1>OneSharedOcean</h1>
+      <h2>One Shared Ocean</h2>
     </div>
 
     <div id="canvas"></div>
     <div style="margin:0 auto; width:110px; padding:0; padding-bottom:10px; font-family: Verdana; font-size:11px">Risk level</div>
     <div style"float:left" id="legendRanges">
       <ul>
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#D8232A; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Very high</span></li>
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#EE9F42; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">High</span></li>
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#E4E344; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Moderately large</span></li>
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#78BB4B; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Low</span></li>
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#5FBADD; border: 1px solid #CBCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Very low</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#ca0020; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Very high</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#f4a582; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">High</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#c3b5b0; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Medium</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#92c5de; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Low</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#0571b0; border: 1px solid #CBCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Very low</span></li>
 
       </ul>
     </div>
@@ -85,7 +85,10 @@ http://bl.ocks.org/mbostock/4183330
     <script>
      var width = 750,
      height = 500;
-     var riskColor=["#5fbadd","#78bb4b","#e4e344","#ee9f42","#d8232a"];
+     //var riskColor=["#5fbadd","#78bb4b","#e4e344","#ee9f42","#d8232a"];
+     var riskColor=["#0571b0","#92c5de", "#c3b5b0", "#f4a582", "#ca0020"];
+
+
      var projection = d3.geo.orthographic()
                             .scale(248)
                             .clipAngle(90);
@@ -134,10 +137,12 @@ http://bl.ocks.org/mbostock/4183330
            .each("start", function() {
              // search for this eez_id in the list
              //thisEEZid=risk[i].eez_id;
-	     i=(i+1)%N
-             thisEEZpos = i;
-	     
-
+             i=(i+1)%N // position in the list of risk values
+             thisEEZpos = 0;
+             for (ii=0; ii<EEZ.length; ii++) {
+               if (EEZ[ii].properties.ID == risk[i].eez_id) thisEEZpos=ii;
+             }
+             console.log(i, thisEEZpos, risk[i].eez_id);
              //             return i;
            })
            .tween("rotate", function() {
@@ -150,7 +155,7 @@ http://bl.ocks.org/mbostock/4183330
                c.fillStyle = "#f9f6d8", c.beginPath(), path(land), c.fill();
                // EEZ
                //c.fillStyle = "#cbcccb", c.beginPath(), path(eez),c.fill();
-               c.strokeStyle = thisColor, c.lineWidth=.5, c.beginPath(),path(EEZ[thisEEZpos]),c.stroke();
+               c.strokeStyle = thisColor, c.lineWidth=1.0, c.beginPath(),path(EEZ[thisEEZpos]),c.stroke();
                c.fillStyle = thisColor, c.beginPath(), path(EEZ[thisEEZpos]), c.fill();
 
                // lmes
