@@ -121,9 +121,9 @@ http://bl.ocks.org/mbostock/4183330
        var lmes=topojson.feature(lmes, lmes.objects.lmes66);
        var eez=topojson.feature(eezs, eezs.objects.eez);
        var EEZ=topojson.feature(eezs, eezs.objects.eez).features;
-       console.log(EEZ);
-       console.log(EEZ[2]);
-       console.log(EEZ[2].properties.ID);
+       //console.log(EEZ);
+       //console.log(EEZ[2]);
+       //console.log(EEZ[2].properties.ID);
        var N=risk.length,
        maxRisk=0;
        for (var ii=0; ii<N; ii++){
@@ -142,7 +142,7 @@ http://bl.ocks.org/mbostock/4183330
              for (ii=0; ii<EEZ.length; ii++) {
                if (EEZ[ii].properties.ID == risk[i].eez_id) thisEEZpos=ii;
              }
-             console.log(i, thisEEZpos, risk[i].eez_id);
+             //console.log(i, thisEEZpos, risk[i].eez_id);
              //             return i;
            })
            .tween("rotate", function() {
@@ -150,7 +150,7 @@ http://bl.ocks.org/mbostock/4183330
              r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
              return function(t) {
                projection.rotate(r(t));
-               thisColor = riskColor[Math.round(5*risk[i].Total_Risk/maxRisk)];
+               thisColor = riskColor[Math.floor(5*risk[i].Total_Risk/maxRisk)];
                c.clearRect(0, 0, width, height);
                c.fillStyle = "#f9f6d8", c.beginPath(), path(land), c.fill();
                // EEZ
