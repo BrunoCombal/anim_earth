@@ -10,7 +10,7 @@ http://bl.ocks.org/mbostock/4183330
      @import url(https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic);
 
      body {
-       background: url("./coral_fish3.jpg") no-repeat center center fixed;
+       background: url("./12197898755_b3c85b617a_k_d.jpg") no-repeat center center fixed;
        -webkit-background-size: cover;
        -moz-background-size: cover;
        -o-background-size: cover;
@@ -27,6 +27,8 @@ http://bl.ocks.org/mbostock/4183330
        font-weight:bold;
        text-align:center;
        color:#FFF;
+       margin-bottom:0;
+       margin-top:10px;
      }
      .announce h2{
        font-weight:normal;
@@ -51,7 +53,7 @@ http://bl.ocks.org/mbostock/4183330
      }
      .legendText{
        font-size:14px;
-       color:#fff;
+       color:#fff; /*#ffc58c;*/
        position: relative;
        top: 4px;
      }
@@ -100,16 +102,16 @@ http://bl.ocks.org/mbostock/4183330
     <div class="announce" style="width:110px; padding:0; padding-bottom:10px; font-family: 'PT sans'; color:#fff; font-size:14px; font-weight:bold">Risk level</div>
     <div  id="legendRanges" >
       <ul >
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#ca0020; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Very high</span></li>
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#f4a582; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">High</span></li>
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#c3b5b0; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Medium</span></li>
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#92c5de; border: 1px solid #CBCCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Low</span></li>
-        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#0571b0; border: 1px solid #CBCCB; color:#FFFFFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Very low</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#ca0020; border: 1px solid #CBCCCB; color:#fff; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Very high</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#f4a582; border: 1px solid #CBCCCB;  color:#fff; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">High</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#c3b5b0; border: 1px solid #CBCCCB; color:#FFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Medium</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#92c5de; border: 1px solid #CBCCCB; color:#FFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Low</span></li>
+        <li><div style="border-radius:50%; width:20px; height:20px; padding:0px; background:#0571b0; border: 1px solid #CBCCB; color:#FFF; text-align:center; font: 10px Arial, sans-serif;"><span style="margin: auto auto;"></span></div> <span class="legendText">Very low</span></li>
       </ul>
     </div>
     <div style="clear:both"></div>
     <div class="imagecredit">
-      background image by <a href="http://stockarch.com/images/nature/underwater/oceanscape-2360" target="_blank">stockarch - stockarch.com</a>
+      background image by <a href="https://www.flickr.com/photos/usfwspacific/12197898755/" target="_blank">Susan White/USFWS</a>
     </div>
     <div style="clear:both"></div>
 
@@ -190,21 +192,23 @@ http://bl.ocks.org/mbostock/4183330
                    }
                  }
                }
-	       console.log(risk[i].Total_Risk, thisColor);
+
                //thisColor = riskColor[Math.floor(5*risk[i].Total_Risk/maxRisk)];
                c.clearRect(0, 0, width, height);
-               c.fillStyle = "#DDFCFF", c.beginPath(), path(globe), c.fill();
-               c.fillStyle = "#f9f6d8", c.beginPath(), path(land), c.fill();
+	       // ocean/globe color: #ddfcff, cdefff
+               c.fillStyle = "#0cdcf7", c.beginPath(), path(globe), c.fill();
+	       // land: #f9f6d8
+               c.fillStyle = "#236365", c.beginPath(), path(land), c.fill();
                // EEZ
                //c.fillStyle = "#cbcccb", c.beginPath(), path(eez),c.fill();
-               c.strokeStyle = thisColor, c.lineWidth=1.0, c.beginPath(),path(EEZ[thisEEZpos]),c.stroke();
+               c.strokeStyle = thisColor, c.lineWidth=1.5, c.beginPath(),path(EEZ[thisEEZpos]),c.stroke();
                c.fillStyle = thisColor, c.beginPath(), path(EEZ[thisEEZpos]), c.fill();
 
-               // lmes
-               c.strokeStyle = "#a0cbd1", c.lineWidth=1.75, c.beginPath(),path(lmes),c.stroke();
+               // lmes: outline a0cbd1, 29c6fb
+               c.strokeStyle = "#039fd0", c.lineWidth=1.75, c.beginPath(),path(lmes),c.stroke();
 
-               // globe frame
-               c.strokeStyle = "#a5bfdd", c.lineWidth = 2, c.beginPath(), path(globe), c.stroke();
+               // globe frame: #a5bfdd
+               c.strokeStyle = "#0cdcf7", c.lineWidth = 2, c.beginPath(), path(globe), c.stroke();
              };
            })
            .transition()
