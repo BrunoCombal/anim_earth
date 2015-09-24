@@ -74,10 +74,10 @@ http://bl.ocks.org/mbostock/4183330
        top:100px;
        left:-20px;
        color:#ccc;
-       }
+     }
      .imagecredit a{
        color:#ccc;
-       }
+     }
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
@@ -117,7 +117,7 @@ http://bl.ocks.org/mbostock/4183330
      var width = 750,
      height = 500;
      //var riskColor=["#5fbadd","#78bb4b","#e4e344","#ee9f42","#d8232a"];
-     var riskColor=["#0571b0","#92c5de", "#c3b5b0", "#f4a582", "#ca0020"];
+     var riskColor=["#0571b0","#92c5de", "#c3b5b0", "#f4a582", "#ca0020"]; // from very low to very high
 
 
      var projection = d3.geo.orthographic()
@@ -152,9 +152,7 @@ http://bl.ocks.org/mbostock/4183330
        var lmes=topojson.feature(lmes, lmes.objects.lmes66);
        var eez=topojson.feature(eezs, eezs.objects.eez);
        var EEZ=topojson.feature(eezs, eezs.objects.eez).features;
-       //console.log(EEZ);
-       //console.log(EEZ[2]);
-       //console.log(EEZ[2].properties.ID);
+
        var N=risk.length,
        maxRisk=0;
        for (var ii=0; ii<N; ii++){
@@ -173,15 +171,27 @@ http://bl.ocks.org/mbostock/4183330
              for (ii=0; ii<EEZ.length; ii++) {
                if (EEZ[ii].properties.ID == risk[i].eez_id) thisEEZpos=ii;
              }
-             //console.log(i, thisEEZpos, risk[i].eez_id);
-             //             return i;
+
            })
            .tween("rotate", function() {
              var p = d3.geo.centroid(EEZ[thisEEZpos]),
              r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
              return function(t) {
                projection.rotate(r(t));
-               thisColor = riskColor[Math.floor(5*risk[i].Total_Risk/maxRisk)];
+               if (parseFloat(risk[i].Total_Risk)>=0.1785) {
+		 thisColor=riskColor[4];
+	       } else {
+                 if (parseFloat(risk[i].Total_Risk)>=0.1114) { thisColor=riskColor[3]}
+                 else {
+                   if (parseFloat(risk[i].Total_Risk)>=0.0717) { thisColor=riskColor[2]}
+                   else {
+                     if (parseFloat(risk[i].Total_Risk)>=0.0417) { thisColor=riskColor[1]}
+                     else { thisColor=riskColor[0]}
+                   }
+                 }
+               }
+	       console.log(risk[i].Total_Risk, thisColor);
+               //thisColor = riskColor[Math.floor(5*risk[i].Total_Risk/maxRisk)];
                c.clearRect(0, 0, width, height);
                c.fillStyle = "#DDFCFF", c.beginPath(), path(globe), c.fill();
                c.fillStyle = "#f9f6d8", c.beginPath(), path(land), c.fill();
