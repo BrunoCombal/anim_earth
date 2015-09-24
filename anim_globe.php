@@ -70,13 +70,17 @@ drupal_add_js("https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.m
    font-size:10px;
    float:right;
    position:relative;
-   top:100px;
+/*
+      top:100px;
+*/
    left:-20px;
    color:#ccc;
+   margin-top:100px;
  }
  .imagecredit a{
    color:#ccc;
  }
+
 </style>
 
 
@@ -101,10 +105,35 @@ drupal_add_js("https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.m
   </ul>
 </div>
 <div style="clear:both"></div>
-<div class="imagecredit">
+<div class="imagecredit" >
   background image by <a href="https://www.flickr.com/photos/usfwspacific/12197898755/" target="_blank">Susan White/USFWS</a>
 </div>
 <div style="clear:both"></div>
+
+<div id="footer_logos" style="background-color:#fff">
+  <span>
+    <!-- UNESCO/IOC logo -->
+    <a href="//ioc.unesco.org" target="blank" ><img src="/iframes/iconz/unesco_ioc_small.png" style="background-color:#fff" width="100px" align="top"></img></a>
+    <!-- EU logo -->
+    <a href="//europa.eu" target="blank"><img src="/iframes/iconz/eu_flag_color.jpg"  align="top" width="60px" ></img></a>
+    <!-- GEO logo -->
+    <a href="//www.earthobservations.org" target="blank"><img src="/iframes/iconz/geo_logo.png" align="top" width="100px"></img></a>
+    <!-- GEF logo -->
+    <a href="//thegef.org" target="blank"><img src="/iframes/iconz/gef_logo_small.png" width="60px" align="top"></img></a>
+    <!-- UNEP logo -->
+    <a href="//unep.org"><img src="/iframes/iconz/unep.png" style="background-color:#fff" width="55px" align="top"></img></a>
+    <!-- TWAP logo -->
+    <a href="//www.geftwap.org" target="blank"><img src="/iframes/iconz/TWAP-Logo.png" style="background-color:#fff" width="180px" align="top"></img></a>
+  </span>
+  <div id="credits" style="background-color:#fff">
+    <span id="copyright" >&copy;&nbsp;<?php print(date('Y') . ' ');?>
+      <?php if (!empty($site_name)):?>
+        <?php print $site_name;?>, IOC-UNESCO
+      <?php endif;?>
+    </span>
+    “This project has received funding from the European Union’s Seventh Programme for research, technological development and demonstration under grant agreement No 282915”. <br/><a href="http://www.geowow.eu/" target="_blank">www.geowow.eu</a>
+  </div>
+</div>
 
 <script>
  var width = 750,
@@ -187,7 +216,7 @@ drupal_add_js("https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.m
            //thisColor = riskColor[Math.floor(5*risk[i].Total_Risk/maxRisk)];
            c.clearRect(0, 0, width, height);
            // ocean/globe color: #ddfcff, cdefff
-           c.fillStyle = "#0cdcf7", c.beginPath(), path(globe), c.fill();
+           c.fillStyle = "#00c7f1", c.beginPath(), path(globe), c.fill();
            // land: #f9f6d8
            c.fillStyle = "#236365", c.beginPath(), path(land), c.fill();
            // EEZ
